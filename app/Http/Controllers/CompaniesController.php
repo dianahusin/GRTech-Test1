@@ -22,6 +22,7 @@ class CompaniesController extends Controller
     {
         $companies = Companies::all();
         return view('modules.companies.index',compact('companies'));
+
     }
 
     public function getCompanyData()

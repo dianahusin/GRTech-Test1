@@ -43,7 +43,7 @@
                     {{-- @if (Auth::user()->name == 'admin') --}}
 
                     <!-- Left Side Of Navbar -->
-                    {{-- <ul class="navbar-nav mr-auto">
+                    <ul class="navbar-nav mr-auto">
                         <ul class="nav">
                             <li class="nav-item">
                                 <a class="nav-link active" aria-current="page" href="{{route('companies.index')}}">Companies</a>
@@ -52,7 +52,7 @@
                                 <a class="nav-link" href="{{route('employees.index')}}">Employees</a>
                             </li>
                         </ul>
-                    </ul> --}}
+                    </ul>
                     {{-- @endif --}}
 
                     <!-- Right Side Of Navbar -->

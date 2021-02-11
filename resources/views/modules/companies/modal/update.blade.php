@@ -1,7 +1,8 @@
 <!-- Modal -->
 
 @foreach ($companies as $company)
-<div class="modal fade" id="update-{{$company->id}}" tabindex="-1" role="dialog" aria-labelledby="updatemodal" aria-hidden="true">
+<div class="modal fade" id="update-{{$company->id}}" tabindex="-1" role="dialog" aria-labelledby="updatemodal"
+    aria-hidden="true">
     <div class="modal-dialog modal-xl" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -26,21 +27,35 @@
                             <div role="group" class="form-group">
                                 <div class="form-row">
                                     <label class="form-label">Email</label>
-                                    <input type="email" class="form-control" name="email" value="{{$company->email}}" readonly>
+                                    <input type="email" class="form-control" name="email" value="{{$company->email}}"
+                                        readonly>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div role="group" class="form-group">
                                 <div class="form-row">
-                                    <label class="form-label">Logo</label>
-                                    <input type="file" class="form-control" name="logo" value="{{$company->logo}}" accept="image/*">
+                                    <label class=" col-sm-3 form-label">Logo</label>
+                                    <div class="col-sm-4">
+                                        @if ($company->logo)
+                                            <img src="{{asset('storage/'. $company->logo)}}" alt="logo"
+                                                style="width: 100px; height:100px">
+                                            @else
+                                            <i class="fas fa-portrait" style="font-size: 80px"></i>
+                                            @endif
+                                    </div>
+                                    <div class="col-sm-5">
+                                        <input type="file" class="form-control" name="logo"
+                                        value="{{$company->logo}}" accept="image/*">
+                                    </div>
+
                                 </div>
                             </div>
                             <div role="group" class="form-group">
                                 <div class="form-row">
                                     <label class="form-label">Website</label>
-                                    <input type="text" class="form-control" name="website" value="{{$company->website}}">
+                                    <input type="text" class="form-control" name="website"
+                                        value="{{$company->website}}">
                                 </div>
                             </div>
                         </div>
@@ -55,4 +70,3 @@
     </div>
 </div>
 @endforeach
-

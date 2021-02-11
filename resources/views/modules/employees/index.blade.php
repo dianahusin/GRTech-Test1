@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app2')
 
 @section('content')
 
@@ -80,20 +80,20 @@
             ]
         });
 
-        $('.btn-submit').on('click', function(e){
-        e.preventDefault();
-        swal.fire({
-        title: 'Are you sure?',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        }).then((result) => {
-           if(result.isConfirmed == true){
-            e.target.form.submit();
-           }
-        })
-    });
+    //     $('.btn-submit').on('click', function(e){
+    //     e.preventDefault();
+    //     swal.fire({
+    //     title: 'Are you sure?',
+    //     icon: 'warning',
+    //     showCancelButton: true,
+    //     confirmButtonColor: '#3085d6',
+    //     cancelButtonColor: '#d33',
+    //     }).then((result) => {
+    //        if(result.isConfirmed == true){
+    //         e.target.form.submit();
+    //        }
+    //     })
+    // });
     });
 
 </script>

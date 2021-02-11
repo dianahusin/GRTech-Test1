@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app2')
 
 @section('content')
 
@@ -88,15 +88,15 @@
         });
 
 
-    $('.btn-submit').on('click',function(e){
-                e.preventDefault();
-                swalconfirm()
-                .then(result => {
-            if (result.value) {
-                    e.target.form.submit();
-         }
-        });
-    });
+    // $('.btn-submit').on('click',function(e){
+    //             e.preventDefault();
+    //             swalconfirm()
+    //             .then(result => {
+    //         if (result.value) {
+    //                 e.target.form.submit();
+    //      }
+    //     });
+    // });
 
     });
 

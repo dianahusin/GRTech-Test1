@@ -15,13 +15,13 @@
                         <div class="col-md-6">
                             <div role="group" class="form-group">
                                 <div class="form-row">
-                                    <label class="form-label">Name</label>
+                                    <label class="form-label">Name<span class="text-danger label-required">*</span></label>
                                     <input type="text" class="form-control" name="name" >
                                 </div>
                             </div>
                             <div role="group" class="form-group">
                                 <div class="form-row">
-                                    <label class="form-label">Email</label>
+                                    <label class="form-label">Email<span class="text-danger label-required">*</span></label>
                                     <input type="email" class="form-control" name="email">
                                 </div>
                             </div>
@@ -35,7 +35,7 @@
                             </div>
                             <div role="group" class="form-group">
                                 <div class="form-row">
-                                    <label class="form-label">Website</label>
+                                    <label class="form-label">Website<span class="text-danger label-required">*</span></label>
                                     <input type="url" class="form-control" name="website">
                                 </div>
                             </div>

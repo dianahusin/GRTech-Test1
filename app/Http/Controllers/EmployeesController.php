@@ -117,5 +117,5 @@ class EmployeesController extends Controller
         return redirect()->back()->with('success', 'Information Succesfully Delete');
     }
 
-  
+
 }
