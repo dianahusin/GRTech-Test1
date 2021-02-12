@@ -6,7 +6,7 @@ use App\Models\Companies;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
-class CompaniesController extends Controller
+class CompanyController extends Controller
 {
     public function __construct()
     {
@@ -21,9 +21,9 @@ class CompaniesController extends Controller
     public function index()
     {
         $companies = Companies::all();
-        return view('modules.companies.index',compact('companies'));
-
+        return view('modules.companies.index', compact('companies'));
     }
+
 
     public function getCompanyData()
     {
@@ -31,11 +31,11 @@ class CompaniesController extends Controller
 
         return DataTables::eloquent($companies)
         ->addIndexColumn()
-        ->addColumn('index', function($company){
+        ->addColumn('index', function ($company) {
             return $company->count();
         })
-        ->addColumn('action', function($company){
-          return '<button class="btn btn-sm btn-primary mb-3" data-toggle="modal"
+        ->addColumn('action', function ($company) {
+            return '<button class="btn btn-sm btn-primary mb-3" data-toggle="modal"
             data-target="#update-'. $company->id .'">Update</button> &nbsp;'
             .
             '<form action="'.route('companies.delete', $company->id).'" method="POST" >
@@ -44,18 +44,15 @@ class CompaniesController extends Controller
             <button class="btn btn-sm btn-danger mb-3 btn-submit" onclick="return confirm(\'Are You Sure?\')">Delete</button>
             </form>';
         })
-        ->editColumn('logo', function($company){
-
+        ->editColumn('logo', function ($company) {
             $url= asset('storage/'.$company->logo);
             return '<img src="'.$url.'" border="0" width="40" class="img-rounded" align="center" />';
         })
-        ->editColumn('website', function($company){
-
+        ->editColumn('website', function ($company) {
             return '<a href="'.$company->website.'" target="_blank">'.$company->website.'</a>';
         })
         ->rawColumns(['action','logo','website'])
        ->toJson();
-
     }
 
     /**
@@ -112,7 +109,6 @@ class CompaniesController extends Controller
         $company->save();
 
         return redirect()->back()->with('success', 'Information Succesfully Update');
-
     }
 
     /**
@@ -126,6 +122,4 @@ class CompaniesController extends Controller
         $company->delete();
         return redirect()->back()->with('success', 'Information Succesfully Delete');
     }
-
-
 }

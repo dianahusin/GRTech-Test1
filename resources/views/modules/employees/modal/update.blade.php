@@ -41,7 +41,7 @@
                             <div role="group" class="form-group">
                                 <div class="form-row">
                                     <label class="form-label">Phone</label>
-                                    <input type="text" class="form-control" name="phone" value="{{$employee->phone}}">
+                                    <input type="number" class="form-control" name="phone" value="{{$employee->phone}}">
                                 </div>
                             </div>
                         </div>

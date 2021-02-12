@@ -7,7 +7,7 @@ use App\Models\Employees;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
-class EmployeesController extends Controller
+class EmployeeController extends Controller
 {
     public function __construct()
     {

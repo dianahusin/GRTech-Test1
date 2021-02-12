@@ -27,20 +27,20 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 // Route::group(['middleware' => ['auth', 'admin']], function () {
     Route::group(['middleware' => ['auth','admin']], function () {
         //Companies
-        Route::get('/companies', 'App\Http\Controllers\CompaniesController@index')->name('companies.index');
-        Route::post('/companies', 'App\Http\Controllers\CompaniesController@create')->name('companies.create');
-        Route::put('/companies/update/{company}', 'App\Http\Controllers\CompaniesController@update')->name('companies.update');
-        Route::delete('/companies/delete/{company}', 'App\Http\Controllers\CompaniesController@destroy')->name('companies.delete');
+        Route::get('/companies', 'App\Http\Controllers\CompanyController@index')->name('companies.index');
+        Route::post('/companies', 'App\Http\Controllers\CompanyController@create')->name('companies.create');
+        Route::put('/companies/update/{company}', 'App\Http\Controllers\CompanyController@update')->name('companies.update');
+        Route::delete('/companies/delete/{company}', 'App\Http\Controllers\CompanyController@destroy')->name('companies.delete');
 
         //Ajax
-        Route::get('/companies/getcompanydata', 'App\Http\Controllers\CompaniesController@getCompanyData')->name('companies.getCompanyData');
+        Route::get('/companies/getcompanydata', 'App\Http\Controllers\CompanyController@getCompanyData')->name('companies.getCompanyData');
 
         //Employees
-        Route::get('/employees', 'App\Http\Controllers\EmployeesController@index')->name('employees.index');
-        Route::post('/employees', 'App\Http\Controllers\EmployeesController@create')->name('employees.create');
-        Route::put('/employees/update/{employee}', 'App\Http\Controllers\EmployeesController@update')->name('employees.update');
-        Route::delete('/employees/delete/{employee}', 'App\Http\Controllers\EmployeesController@destroy')->name('employees.delete');
+        Route::get('/employees', 'App\Http\Controllers\EmployeeController@index')->name('employees.index');
+        Route::post('/employees', 'App\Http\Controllers\EmployeeController@create')->name('employees.create');
+        Route::put('/employees/update/{employee}', 'App\Http\Controllers\EmployeeController@update')->name('employees.update');
+        Route::delete('/employees/delete/{employee}', 'App\Http\Controllers\EmployeeController@destroy')->name('employees.delete');
 
         //Ajax
-        Route::get('/employees/getemployeedata', 'App\Http\Controllers\EmployeesController@getEmployeeData')->name('employees.getEmployeeData');
+        Route::get('/employees/getemployeedata', 'App\Http\Controllers\EmployeeController@getEmployeeData')->name('employees.getEmployeeData');
     });
