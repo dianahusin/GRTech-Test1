@@ -25,8 +25,6 @@ class EmployeeController extends Controller
         $employees = Employees::all();
         $companies = Companies::all();
 
-
-
         return view('modules.employees.index', compact(
             'employees',
             'companies'

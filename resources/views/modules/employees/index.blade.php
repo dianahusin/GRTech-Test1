@@ -25,47 +25,46 @@
             <div class="card">
                 <div class="card-header"><b><i>Search</i></b></div>
                 <section class="mb-2 card-body">
-                    <form>
-                        <div class="form-group row">
+                        {{-- <div class="form-group row">
                             <label class="col-form-label col-md-2">Date</label>
                             <div class="col-md-2">
-                                <input class="form-control" name="start_date" id="start_date" type="date" >
+                                <input class="form-control filter" name="start_date" id="start_date" type="date" data-column="0">
                             </div>
                             TO
                             <div class="col-md-2">
-                                <input class="form-control" name="end_date" id="end_date" type="date" >
+                                <input class="form-control filter" name="end_date" id="end_date" type="date" data-column="1">
                             </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-form-label col-md-2">Email</label>
+                        </div> --}}
+                        {{-- <div class="form-group row">
+                            <label class="col-form-label col-md-2">First Name</label>
                             <div class="col-md-4">
-                                <input class="form-control" name="email" type="email" >
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-form-label col-md-2">Fist Name</label>
-                            <div class="col-md-4">
-                                <input class="form-control" name="fisrtname" type="text" >
+                                <input class="form-control filter" name="firstname" type="text" data-column="0">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-form-label col-md-2">Last Name</label>
                             <div class="col-md-4">
-                                <input class="form-control" name="lastname" type="text" >
+                                <input class="form-control filter" name="lastname" type="text" data-column="1">
+                            </div>
+                        </div> --}}
+                        <div class="form-group row">
+                            <label class="col-form-label col-md-2">Full Name</label>
+                            <div class="col-md-4">
+                                <input class="form-control filter" name="fullname" type="text" data-column="2">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-form-label col-md-2">Email</label>
+                            <div class="col-md-4">
+                                <input class="form-control filter" name="email" type="email" data-column="2">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-form-label col-md-2">Company</label>
                             <div class="col-md-4">
-                                <input class="form-control" name="company" type="text" >
+                                <input class="form-control filter" name="company" type="text" data-column="2">
                             </div>
                         </div>
-                        <div class="text-right" style="margin-right:34%;">
-                            <button class="btn btn-warning" type="reset" > Reset</button>
-                            {{-- <button class="btn btn-primary">Search</button> --}}
-                            <button type="text" id="search-form" class="btn btn-info">Search</button>
-                        </div>
-                    </form>
                 </section>
             </div>
             <button type="button" class="btn btn-sm btn-primary mb-3 mt-3" data-toggle="modal" data-target="#create"> <i
@@ -77,8 +76,9 @@
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">Full Name</th>
+                        <th scope="col">First Name</th>
                         <th scope="col">Email</th>
-                        <th scope="col">Company Name</th>
+                        <th scope="col">Company</th>
                         <th scope="col">Action</th>
                     </tr>
                 </thead>
@@ -91,17 +91,11 @@
 @section('js')
 <script>
     $(document).ready(function(){
-        $('#employeetable').DataTable({
+           var table =  $('#employeetable').DataTable({
             processing:true,
             serverSide:true,
             ajax: {
                 url: "{{route('employees.getEmployeeData')}}",
-                data: function (d) {
-                d.firstname = $('input[name=firstname]').val();
-                d.lastname = $('input[name=lastname]').val();
-                d.email = $('input[name=email]').val();
-                d.company = $('input[name=company]').val();
-            }
 
             },
             columns: [
@@ -114,6 +108,10 @@
                 {
                     name:'fullname',
                     data:'fullname'
+                },
+                {
+                    name:'firstname',
+                    data:'firstname'
                 },
                 {
                     name:'email',
@@ -132,15 +130,26 @@
             ]
         });
 
-        $('#search-form').on('submit', function(e) {
-        oTable.draw();
-        e.preventDefault();
+
+        $('.filter').on('keyup', function() {
+            table.column( $(this).data('column') )
+            .search($(this).val())
+            .draw();
+        });
+
+        // $('.filter-firstname').on('keyup', function() {
+        //     table.column($(this).data('firstname'))
+        //     .search($(this).val())
+        //     .draw();
+        // });
+
+        // $('.filter-company').on('keyup', function() {
+        //     table.column($(this).data('company'))
+        //     .search($(this).val())
+        //     .draw();
+        // });
 
 });
-
-
-    });
-
 </script>
 
 @endsection
