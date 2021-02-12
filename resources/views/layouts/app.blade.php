@@ -103,6 +103,7 @@
      <script src="{{ asset('js/app.js') }}"></script>
      <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.js"></script>
 
+
      @yield('js')
 </body>
 

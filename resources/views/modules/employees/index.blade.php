@@ -22,7 +22,53 @@
 <div class="content p-3">
     <div class="card card-body">
         <div class="card-body">
-            <button type="button" class="btn btn-sm btn-primary mb-3" data-toggle="modal" data-target="#create"> <i
+            <div class="card">
+                <div class="card-header"><b><i>Search</i></b></div>
+                <section class="mb-2 card-body">
+                    <form>
+                        <div class="form-group row">
+                            <label class="col-form-label col-md-2">Date</label>
+                            <div class="col-md-2">
+                                <input class="form-control" name="start_date" id="start_date" type="date" >
+                            </div>
+                            TO
+                            <div class="col-md-2">
+                                <input class="form-control" name="end_date" id="end_date" type="date" >
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-form-label col-md-2">Email</label>
+                            <div class="col-md-4">
+                                <input class="form-control" name="email" type="email" >
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-form-label col-md-2">Fist Name</label>
+                            <div class="col-md-4">
+                                <input class="form-control" name="fisrtname" type="text" >
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-form-label col-md-2">Last Name</label>
+                            <div class="col-md-4">
+                                <input class="form-control" name="lastname" type="text" >
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-form-label col-md-2">Company</label>
+                            <div class="col-md-4">
+                                <input class="form-control" name="company" type="text" >
+                            </div>
+                        </div>
+                        <div class="text-right" style="margin-right:34%;">
+                            <button class="btn btn-warning" type="reset" > Reset</button>
+                            {{-- <button class="btn btn-primary">Search</button> --}}
+                            <button type="text" id="search-form" class="btn btn-info">Search</button>
+                        </div>
+                    </form>
+                </section>
+            </div>
+            <button type="button" class="btn btn-sm btn-primary mb-3 mt-3" data-toggle="modal" data-target="#create"> <i
                     class="fa fa-plus"></i>
                 Add</button>
             @include('modules.employees.modal.create')
@@ -50,6 +96,12 @@
             serverSide:true,
             ajax: {
                 url: "{{route('employees.getEmployeeData')}}",
+                data: function (d) {
+                d.firstname = $('input[name=firstname]').val();
+                d.lastname = $('input[name=lastname]').val();
+                d.email = $('input[name=email]').val();
+                d.company = $('input[name=company]').val();
+            }
 
             },
             columns: [
@@ -80,21 +132,15 @@
             ]
         });
 
-    //     $('.btn-submit').on('click', function(e){
-    //     e.preventDefault();
-    //     swal.fire({
-    //     title: 'Are you sure?',
-    //     icon: 'warning',
-    //     showCancelButton: true,
-    //     confirmButtonColor: '#3085d6',
-    //     cancelButtonColor: '#d33',
-    //     }).then((result) => {
-    //        if(result.isConfirmed == true){
-    //         e.target.form.submit();
-    //        }
-    //     })
-    // });
+        $('#search-form').on('submit', function(e) {
+        oTable.draw();
+        e.preventDefault();
+
+});
+
+
     });
 
 </script>
+
 @endsection

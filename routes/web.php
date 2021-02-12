@@ -43,4 +43,5 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
         //Ajax
         Route::get('/employees/getemployeedata', 'App\Http\Controllers\EmployeeController@getEmployeeData')->name('employees.getEmployeeData');
+        Route::get('/employees/getcustomfilterdata', 'App\Http\Controllers\EmployeeController@getCustomFilterData')->name('employees.getCustomFilterData');
     });

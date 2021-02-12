@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Companies;
 use App\Models\Employees;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -19,11 +20,17 @@ class EmployeeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $employees = Employees::all();
         $companies = Companies::all();
-        return view('modules.employees.index', compact('employees', 'companies'));
+
+
+
+        return view('modules.employees.index', compact(
+            'employees',
+            'companies'
+        ));
     }
 
     public function getEmployeeData()
@@ -52,6 +59,29 @@ class EmployeeController extends Controller
             return $employee->fullname;
         })
         ->rawColumns(['action', 'fullname', 'company'])
+
+        // ->filter(function ($query) {
+        //     if (request()->has('firstname')) {
+        //         $query->where('firstname', 'like', "%" . request('firstname') . "%");
+        //     }
+        //     if (request()->has('lastname')) {
+        //         $query->where('lastname', 'like', "%" . request('lastname') . "%");
+        //     }
+        //     if (request()->has('company')) {
+        //         $query->where('company', 'like', "%" . request('company') . "%");
+        //     }
+
+        //     if (request()->has('startdate')) {
+        //         $query->where('created_at', 'like', "%" . request('startdate') . "%");
+        //     }
+        //     if (request()->has('enddate')) {
+        //         $query->where('created_at', 'like', "%" . request('enddate') . "%");
+        //     }
+
+        //     if (request()->has('email')) {
+        //         $query->where('email', 'like', "%" . request('email') . "%");
+        //     }
+        // }, true)
        ->toJson();
     }
 
@@ -116,6 +146,41 @@ class EmployeeController extends Controller
         $employee->delete();
         return redirect()->back()->with('success', 'Information Succesfully Delete');
     }
+
+    public function getCustomFilterData(Request $request)
+    {
+        $users = Employees::select(['id', 'firstname','lastname', 'email','company', 'created_at', 'updated_at'])->get();
+
+        return Datatables::of($users)
+            ->filter(function ($instance) use ($request) {
+                if ($request->has('firstname')) {
+                    $instance->collection = $instance->collection->filter(function ($row) use ($request) {
+                        return Str::contains($row['firstname'], $request->get('fisrtname')) ? true : false;
+                    });
+                }
+                if ($request->has('lastname')) {
+                    $instance->collection = $instance->collection->filter(function ($row) use ($request) {
+                        return Str::contains($row['lastname'], $request->get('lastname')) ? true : false;
+                    });
+                }
+
+                if ($request->has('company')) {
+                    $instance->collection = $instance->collection->filter(function ($row) use ($request) {
+                        return Str::contains($row['company'], $request->get('company')) ? true : false;
+                    });
+                }
+
+                if ($request->has('email')) {
+                    $instance->collection = $instance->collection->filter(function ($row) use ($request) {
+                        return Str::contains($row['email'], $request->get('email')) ? true : false;
+                    });
+                }
+            })
+            ->make(true);
+    }
+
+
+
 
 
 }
